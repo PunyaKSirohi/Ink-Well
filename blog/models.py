@@ -14,10 +14,10 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     tags = models.CharField(max_length=200, blank=True)
-    status = models.IntegerField(choices=STATUS, default=0)
+    status = models.IntegerField(max_length=20, choices=STATUS, default=0)
     
     class Meta:
         ordering = ['-created_at']
     
     def __str__(self):
-        return self.title + ' by ' + str(self.author)
+        return self.title
