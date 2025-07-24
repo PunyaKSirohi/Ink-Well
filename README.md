@@ -1,4 +1,3 @@
-```markdown
 # Person Document Gemma
 
 A comprehensive document processing pipeline that analyzes PDFs based on personas and jobs-to-be-done, extracting the most relevant content using the Gemma 3 LLM.
