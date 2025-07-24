@@ -405,4 +405,3 @@ output_data = format_json(input_docs, persona, job, response, chunks)
 - This project uses the Gemma 3 language model from Google
 - Vector embeddings powered by BGE-small
 - Qdrant vector database for efficient similarity search
-```
