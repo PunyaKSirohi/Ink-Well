@@ -1,0 +1,195 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ post.title }} - InkWell{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Back Button -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'blog:post_list' %}" class="text-decoration-none">
+                            <i class="bi bi-house-fill me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ post.title|truncatechars:50 }}</li>
+                </ol>
+            </nav>
+
+            <!-- Post Content -->
+            <article class="card shadow-sm">
+                <div class="card-body">
+                    <!-- Post Header -->
+                    <header class="mb-4">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <span class="badge bg-success">
+                                <i class="bi bi-check-circle-fill me-1"></i>Published
+                            </span>
+                            <small class="text-muted">
+                                <i class="bi bi-calendar3 me-1"></i>{{ post.created_at|date:"F d, Y" }} at {{ post.created_at|date:"g:i A" }}
+                            </small>
+                        </div>
+                        
+                        <h1 class="display-5 fw-bold mb-3">{{ post.title }}</h1>
+                        
+                        <div class="d-flex flex-wrap align-items-center text-muted mb-3">
+                            <span class="me-4">
+                                <i class="bi bi-person-fill me-1"></i>
+                                <strong>{{ post.author.get_full_name|default:post.author.username }}</strong>
+                            </span>
+                            
+                            {% if post.updated_at != post.created_at %}
+                            <span class="me-4">
+                                <i class="bi bi-pencil-fill me-1"></i>
+                                Updated {{ post.updated_at|date:"M d, Y" }}
+                            </span>
+                            {% endif %}
+                            
+                            {% if post.tags %}
+                            <span>
+                                <i class="bi bi-tags-fill me-1"></i>
+                                {{ post.tags }}
+                            </span>
+                            {% endif %}
+                        </div>
+                        
+                        <hr>
+                    </header>
+
+                    <!-- Post Body -->
+                    <div class="post-content">
+                        {{ post.body|linebreaks }}
+                    </div>
+
+                    <!-- Post Footer -->
+                    <footer class="mt-5">
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="text-muted mb-0">
+                                    <small>
+                                        <i class="bi bi-clock-fill me-1"></i>
+                                        Published {{ post.created_at|timesince }} ago
+                                    </small>
+                                </p>
+                            </div>
+                            <div class="col-md-6 text-md-end">
+                                <a href="{% url 'blog:post_list' %}" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-arrow-left me-1"></i>Back to Posts
+                                </a>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </article>
+
+            <!-- Navigation Between Posts -->
+            <div class="row mt-4">
+                <div class="col-6">
+                    <!-- Previous post link would go here in future -->
+                </div>
+                <div class="col-6 text-end">
+                    <!-- Next post link would go here in future -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Author Info -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="bi bi-person-circle me-2"></i>About the Author
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">{{ post.author.get_full_name|default:post.author.username }}</h6>
+                    <p class="card-text text-muted">
+                        {% if post.author.email %}
+                            <i class="bi bi-envelope-fill me-1"></i>{{ post.author.email }}
+                        {% else %}
+                            <i class="bi bi-person-fill me-1"></i>Blog author and contributor
+                        {% endif %}
+                    </p>
+                    {% if post.author.date_joined %}
+                    <small class="text-muted">
+                        <i class="bi bi-calendar-plus-fill me-1"></i>
+                        Member since {{ post.author.date_joined|date:"M Y" }}
+                    </small>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Post Metadata -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="bi bi-info-circle-fill me-2"></i>Post Details
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <strong>Created:</strong> {{ post.created_at|date:"F d, Y \a\t g:i A" }}
+                        </li>
+                        {% if post.updated_at != post.created_at %}
+                        <li class="mb-2">
+                            <strong>Last Updated:</strong> {{ post.updated_at|date:"F d, Y \a\t g:i A" }}
+                        </li>
+                        {% endif %}
+                        <li class="mb-2">
+                            <strong>Status:</strong> 
+                            <span class="badge bg-success">Published</span>
+                        </li>
+                        {% if post.tags %}
+                        <li class="mb-2">
+                            <strong>Tags:</strong> {{ post.tags }}
+                        </li>
+                        {% endif %}
+                        <li>
+                            <strong>Word Count:</strong> {{ post.body|wordcount }} words
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Share Widget (placeholder for future) -->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="bi bi-share-fill me-2"></i>Share This Post
+                    </h6>
+                </div>
+                <div class="card-body text-center">
+                    <p class="text-muted mb-3">Like this post? Share it with others!</p>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-primary btn-sm" disabled>
+                            <i class="bi bi-link-45deg me-1"></i>Copy Link
+                        </button>
+                        <small class="text-muted">More sharing options coming soon!</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.post-content {
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.post-content p {
+    margin-bottom: 1.5rem;
+}
+
+.post-content h1, .post-content h2, .post-content h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+</style>
+{% endblock %}

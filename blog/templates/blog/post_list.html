@@ -1,0 +1,167 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}InkWell - Modern Blog{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <!-- Hero Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="bg-primary text-white p-5 rounded-3">
+                <h1 class="display-4 fw-bold">
+                    <i class="bi bi-pen-fill me-3"></i>Welcome to InkWell
+                </h1>
+                <p class="lead mb-0">Discover insightful articles, tutorials, and thoughts from our community of writers.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Posts Section -->
+    <div class="row">
+        <div class="col-lg-8">
+            <h2 class="mb-4">
+                <i class="bi bi-collection me-2"></i>Latest Posts
+                {% if posts %}
+                    <span class="badge bg-secondary">{{ posts|length }}</span>
+                {% endif %}
+            </h2>
+            
+            {% if posts %}
+                {% for post in posts %}
+                <article class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <span class="badge bg-success mb-2">
+                                    <i class="bi bi-check-circle-fill me-1"></i>Published
+                                </span>
+                            </div>
+                            <small class="text-muted">
+                                <i class="bi bi-calendar3 me-1"></i>{{ post.created_at|date:"M d, Y" }}
+                            </small>
+                        </div>
+                        
+                        <h3 class="card-title">
+                            <a href="{% url 'blog:post_detail' post.slug %}" class="text-decoration-none">
+                                {{ post.title }}
+                            </a>
+                        </h3>
+                        
+                        <p class="card-text text-muted">
+                            {{ post.body|truncatewords:30|linebreaks }}
+                        </p>
+                        
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <small class="text-muted">
+                                    <i class="bi bi-person-fill me-1"></i>By {{ post.author.username }}
+                                </small>
+                                {% if post.tags %}
+                                    <small class="text-muted ms-3">
+                                        <i class="bi bi-tags-fill me-1"></i>{{ post.tags }}
+                                    </small>
+                                {% endif %}
+                            </div>
+                            <a href="{% url 'blog:post_detail' post.slug %}" class="btn btn-outline-primary btn-sm">
+                                Read More <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+
+                <!-- Pagination -->
+                {% if is_paginated %}
+                <nav aria-label="Posts pagination">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">
+                                    <i class="bi bi-chevron-double-left"></i>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                                    <i class="bi bi-chevron-left"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        <li class="page-item active">
+                            <span class="page-link">
+                                {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                            </span>
+                        </li>
+
+                        {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                                    <i class="bi bi-chevron-right"></i>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">
+                                    <i class="bi bi-chevron-double-right"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+
+            {% else %}
+                <div class="alert alert-info" role="alert">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    <strong>No posts yet!</strong> Check back later for new content, or 
+                    <a href="/admin/" class="alert-link">create your first post</a> in the admin panel.
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-info-circle-fill me-2"></i>About InkWell
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        InkWell is a modern Django blog platform designed for developers and writers who value clean, efficient code and beautiful design.
+                    </p>
+                    <hr>
+                    <small class="text-muted">
+                        <i class="bi bi-code-slash me-1"></i>Built with Django {{ django_version|default:"5.2.4" }}
+                    </small>
+                </div>
+            </div>
+
+            {% if posts %}
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="bi bi-clock-fill me-2"></i>Recent Activity
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-0">
+                        {% for post in posts|slice:":3" %}
+                        <li class="mb-2">
+                            <small>
+                                <a href="{% url 'blog:post_detail' post.slug %}" class="text-decoration-none">
+                                    {{ post.title|truncatechars:40 }}
+                                </a>
+                                <br>
+                                <span class="text-muted">{{ post.created_at|timesince }} ago</span>
+                            </small>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

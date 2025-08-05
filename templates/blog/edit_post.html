@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit: {{ post.title }} - InkWell{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">✏️ Edit Post</h3>
+                <div>
+                    <a href="{% url 'blog:post_detail' post.slug %}" class="btn btn-outline-info btn-sm me-2">
+                        <i class="bi bi-eye"></i> View Post
+                    </a>
+                    <a href="{% url 'blog:user_posts' %}" class="btn btn-outline-secondary btn-sm">
+                        <i class="bi bi-arrow-left"></i> My Posts
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label for="{{ form.title.id_for_label }}" class="form-label">{{ form.title.label }}</label>
+                                {{ form.title }}
+                                {% if form.title.errors %}
+                                    <div class="text-danger small">{{ form.title.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="{{ form.status.id_for_label }}" class="form-label">{{ form.status.label }}</label>
+                                {{ form.status }}
+                                {% if form.status.errors %}
+                                    <div class="text-danger small">{{ form.status.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="mb-3">
+                                <label for="{{ form.slug.id_for_label }}" class="form-label">{{ form.slug.label }}</label>
+                                {{ form.slug }}
+                                <div class="form-text">
+                                    Current URL: <code>{{ request.get_host }}{% url 'blog:post_detail' post.slug %}</code>
+                                </div>
+                                {% if form.slug.errors %}
+                                    <div class="text-danger small">{{ form.slug.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="{{ form.tags.id_for_label }}" class="form-label">{{ form.tags.label }}</label>
+                                {{ form.tags }}
+                                <div class="form-text">Separate with commas</div>
+                                {% if form.tags.errors %}
+                                    <div class="text-danger small">{{ form.tags.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.body.id_for_label }}" class="form-label">{{ form.body.label }}</label>
+                        {{ form.body }}
+                        {% if form.body.errors %}
+                            <div class="text-danger small">{{ form.body.errors }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-check-circle"></i> Update Post
+                            </button>
+                            <a href="{% url 'blog:post_detail' post.slug %}" class="btn btn-secondary btn-lg ms-2">
+                                <i class="bi bi-x-circle"></i> Cancel
+                            </a>
+                        </div>
+                        <div>
+                            <a href="{% url 'blog:delete_post' post.slug %}" 
+                               class="btn btn-outline-danger btn-lg"
+                               onclick="return confirm('Are you sure you want to delete this post?')">
+                                <i class="bi bi-trash"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Post Info Card -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0">📊 Post Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled mb-0">
+                            <li><strong>Created:</strong> {{ post.created_at|date:"F d, Y \a\t g:i A" }}</li>
+                            <li><strong>Last Updated:</strong> {{ post.updated_at|date:"F d, Y \a\t g:i A" }}</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled mb-0">
+                            <li><strong>Status:</strong> 
+                                {% if post.status == 1 %}
+                                    <span class="badge bg-success">Published</span>
+                                {% else %}
+                                    <span class="badge bg-warning">Draft</span>
+                                {% endif %}
+                            </li>
+                            <li><strong>Comments:</strong> {{ post.comments.count }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
