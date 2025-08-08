@@ -88,7 +88,7 @@
                                 <small class="text-muted">{{ comment.created_at|date:"F d, Y \a\t g:i A" }}</small>
                             </div>
                         </div>
-                        <p class="card-text mt-2">{{ comment.content|linebreaks }}</p>
+                        <div class="card-text mt-2">{{ comment.content|linebreaks }}</div>
                     </div>
                 </div>
                 {% endfor %}

@@ -7,6 +7,9 @@ from django.utils.text import slugify
 from django.urls import reverse
 from .models import Post, Comment
 from .forms import CommentForm, PostForm
+from django.http import HttpResponseRedirect
+from django.contrib.auth import logout
+
 
 # Create your views here.
 
@@ -48,6 +51,14 @@ def add_comment(request, slug):
             comment.save()
             messages.success(request, 'Your comment has been added successfully!')
             return redirect('blog:post_detail', slug=slug)
+        else:
+            # If form is invalid, render the post detail page with errors
+            comments = post.comments.filter(active=True)
+            return render(request, 'blog/post_detail.html', {
+                'post': post,
+                'comments': comments,
+                'comment_form': form,  # This will have errors
+            })
     
     return redirect('blog:post_detail', slug=slug)
 
@@ -111,3 +122,11 @@ def user_posts(request):
     """Display user's own posts (both published and drafts)"""
     posts = Post.objects.filter(author=request.user).order_by('-created_at')
     return render(request, 'blog/user_posts.html', {'posts': posts})
+
+@login_required
+#please also include the logout.html file in this view
+def logout_view(request):
+    """Log out the user"""
+    logout(request)
+    messages.success(request, 'You have been logged out successfully!')
+    return HttpResponseRedirect(reverse('blog:post_list'))

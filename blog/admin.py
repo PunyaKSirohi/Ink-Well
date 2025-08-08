@@ -20,12 +20,14 @@ class CommentAdmin(admin.ModelAdmin):
     
     def approve_comments(self, request, queryset):
         queryset.update(active=True)
-        self.message_user(request, f'{queryset.count()} comments approved.')
+        if request:
+            self.message_user(request, f'{queryset.count()} comments approved.')
     approve_comments.short_description = "Approve selected comments"
     
     def disapprove_comments(self, request, queryset):
         queryset.update(active=False)
-        self.message_user(request, f'{queryset.count()} comments disapproved.')
+        if request:
+            self.message_user(request, f'{queryset.count()} comments disapproved.')
     disapprove_comments.short_description = "Disapprove selected comments"
 
 admin.site.register(Post, PostAdmin)

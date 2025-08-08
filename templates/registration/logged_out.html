@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Logged Out - InkWell{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h3 class="text-center mb-0">
+                    <i class="bi bi-check-circle-fill me-2"></i>Successfully Logged Out
+                </h3>
+            </div>
+            <div class="card-body text-center">
+                <div class="alert alert-success" role="alert">
+                    <h5 class="alert-heading">👋 See you later!</h5>
+                    <p class="mb-0">You have been successfully logged out of InkWell.</p>
+                </div>
+                
+                <div class="d-grid gap-2 d-md-block">
+                    <a href="{% url 'blog:post_list' %}" class="btn btn-primary">
+                        <i class="bi bi-house-fill me-1"></i> Back to Homepage
+                    </a>
+                    <a href="{% url 'login' %}" class="btn btn-outline-primary">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Login Again
+                    </a>
+                </div>
+                
+                <div class="mt-4">
+                    <p class="text-muted small">
+                        Want to keep reading? You can still browse all published posts as a guest.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Links -->
+        <div class="mt-4 text-center">
+            <h6>Popular on InkWell</h6>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a href="{% url 'blog:post_list' %}" class="btn btn-sm btn-outline-secondary">Latest Posts</a>
+                <a href="{% url 'blog:register' %}" class="btn btn-sm btn-outline-secondary">Create Account</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
