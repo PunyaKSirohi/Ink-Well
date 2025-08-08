@@ -17,7 +17,7 @@ We take security vulnerabilities seriously. If you believe you have found a secu
 
 **Please do not report security vulnerabilities through public GitHub issues.**
 
-Instead, please send an email to: [your-email@example.com]
+Instead, please send an email to: security@punyaksirohi.dev (or create a private security advisory through GitHub)
 
 Please include the following information:
 - Description of the vulnerability
