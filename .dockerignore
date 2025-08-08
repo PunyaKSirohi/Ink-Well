@@ -1,0 +1,79 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env
+pip-log.txt
+pip-delete-this-directory.txt
+.tox
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.venv
+.env
+
+# Node.js
+node_modules
+npm-debug.log
+
+# IDEs
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Virtual environments
+venv/
+env/
+ENV/
+inkenv/
+
+# Development database
+db.sqlite3
+*.sqlite3
+
+# Static files (will be collected during build)
+staticfiles/
+static/
+
+# Media files
+media/
+
+# Logs
+logs/
+*.log
+
+# Local settings
+.env
+local_settings.py
+
+# SSL certificates
+ssl/
+*.pem
+*.key
+*.crt

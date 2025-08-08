@@ -1,122 +1,19 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
 *.so
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# PyInstaller
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-cover/
-test_results/
-bandit-report.json
-safety-report.json
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
+# Django
 *.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
 staticfiles/
-static_root/
 media/
-migrations/__pycache__/
 
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-.pybuilder/
-target/
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-.python-version
-
-# pipenv
-Pipfile.lock
-
-# poetry
-poetry.lock
-
-# pdm
-pdm.lock
-.pdm.toml
-
-# PEP 582
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
+# Virtual environments
 .env
-.env.local
-.env.production
-.env.example
-.env.development
-.env.staging
 .venv
 env/
 venv/
@@ -125,194 +22,21 @@ env.bak/
 venv.bak/
 inkenv/
 
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# pytype static type analyzer
-.pytype/
-
-# Cython debug symbols
-cython_debug/
-
-# PyCharm / IntelliJ
-.idea/
-*.iml
-*.ipr
-*.iws
-
-# VS Code
+# IDEs
 .vscode/
-*.code-workspace
-
-# Sublime Text
-*.sublime-project
-*.sublime-workspace
-
-# Vim
+.idea/
 *.swp
 *.swo
-*~
 
-# Emacs
-*~
-\#*\#
-/.emacs.desktop
-/.emacs.desktop.lock
-*.elc
-auto-save-list
-tramp
-.\#*
-
-# Node modules (if using Node.js for frontend)
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.npm
-.yarn-integrity
-
-# Docker
-docker-compose.override.yml
-.dockerignore
-
-# OS generated files
+# OS
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
-*.lnk
-Desktop.ini
-
-# Temporary files
-*.tmp
-*.temp
-*.bak
-*.backup
-*.orig
-*.rej
-
-# Secret keys and sensitive information
-secrets.json
-*.pem
-*.key
-.env.secret
-settings_local.py
-
-# Database backups
-*.sql
-*.dump
-*.backup
-
-# Logs
-logs/
-*.log
-
-# Cache
-.cache/
-.sass-cache/
-
-# Webpack
-webpack-stats.json
-
-# Collected static files
-/static/
-/staticfiles/
-
-# User-uploaded files
-/media/
-
-# Local development files
-local.py
-dev.py
 
 # Testing
 .coverage
 htmlcov/
 .pytest_cache/
-test-results/
-coverage.xml
 
-# Security scanning results
-bandit-report.json
-safety-report.json
-
-# Linting reports
-.flake8
-.pylintrc
-pylint-report.txt
-
-# Type checking
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Documentation builds
-docs/_build/
-docs/build/
-site/
-
-# Backup files
+# Temporary files
+*.tmp
 *.bak
-*.backup
-*.orig
-
-# Lock files (keep requirements.txt but ignore lock files)
-poetry.lock
-Pipfile.lock
-yarn.lock
-
-# Build artifacts
-build/
-dist/
-*.egg-info/
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
-coverage/
-
-# Grunt intermediate storage
-.grunt
-
-# Bower dependency directory
-bower_components
-
-# Compiled binary addons
-build/Release
-
-# Dependency directories
-jspm_packages/
-
-# Optional npm cache directory
-.npm
-
-# Optional REPL history
-.node_repl_history
-
-# Output of 'npm pack'
-*.tgz
-
-# Yarn Integrity file
-.yarn-integrity
